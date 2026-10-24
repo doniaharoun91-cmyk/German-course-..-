@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DONIA | تعلّم الألمانية من الصفر</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#6a2fc0;--pd:#3f1c78;--pl:#f3edfc;--pm:#d9c8f5;--w:#fff;--t:#26173f;--mu:#6d5f86;--ok:#1f8a5b;--no:#c0392b;--gold:#e0a100}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tajawal,Tahoma,sans-serif;background:var(--pl);color:var(--t);line-height:1.8}
+header{background:var(--pd);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:980px;margin:auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:relative}
+.logo{font-weight:800;font-size:1.4rem;letter-spacing:1px;cursor:pointer}
+button,.btn{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:8px 16px;background:var(--p);color:#fff;font-weight:700;text-decoration:none;display:inline-block}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #ffd35c;outline-offset:2px}
+.ghost{background:transparent;border:2px solid var(--pm);color:var(--pd)}
+.menuB{background:transparent;color:#fff;border:2px solid #8f67d1;font-size:1.3rem;padding:4px 14px;line-height:1.4}
+.menu{display:none;position:absolute;top:100%;inset-inline-end:16px;background:var(--pd);border-radius:14px;padding:10px;flex-direction:column;gap:6px;min-width:230px;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:10}
+.menu.on{display:flex}
+.menu button{background:transparent;border:2px solid #8f67d1;color:#fff;text-align:start;width:100%}
+.menu button:hover{background:#5a2aa0}
+#userbox{border-top:1px solid #8f67d1;padding-top:8px;margin-top:4px;color:#fff;font-size:.95rem}
+main{max-width:980px;margin:auto;padding:18px 16px 60px}
+.hero{background:var(--p);color:#fff;border-radius:18px;padding:28px 22px;margin-bottom:20px}
+.hero h1{margin:0 0 6px;font-size:1.8rem}.hero p{margin:0;opacity:.92}
+.card{background:var(--w);border:1px solid var(--pm);border-radius:14px;padding:18px;margin-bottom:14px}
+.units{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.unit{border-top:6px solid var(--p);cursor:pointer}
+.soon{border-top:6px solid #b9a6d9;opacity:.9}
+.lock{border-inline-start:5px solid #b9a6d9;text-align:center}
+.prog{height:8px;background:var(--pl);border-radius:6px;overflow:hidden;margin-top:10px}.prog i{display:block;height:100%;background:var(--p)}
+.lessons{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.lessons li{display:flex;align-items:center;gap:10px;background:var(--w);border:1px solid var(--pm);border-radius:12px;padding:10px 14px;cursor:pointer}
+.lessons li.done{background:#eefaf4;border-color:#a8dfc2}
+.lessons li.locked{opacity:.6}
+.n{width:30px;height:30px;border-radius:50%;background:var(--p);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.done .n{background:var(--ok)}
+.vid{position:relative;padding-top:56.25%;border-radius:14px;overflow:hidden;background:#000;margin-bottom:10px}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;align-items:center}
+.pdf{width:100%;height:420px;border:1px solid var(--pm);border-radius:12px;background:#fff}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid var(--pm);text-align:start}th{color:var(--pd)}
+.de{direction:ltr;unicode-bidi:isolate;font-weight:700;color:var(--pd)}
+.sp{background:var(--pl);color:var(--p);padding:4px 10px;border-radius:50%;font-size:1rem}
+h2{color:var(--pd);margin:.2em 0 .4em}h3{color:var(--p);margin:1em 0 .3em}
+.warn{background:#fff6e0;border-inline-start:5px solid var(--gold);padding:10px 14px;border-radius:8px}
+.note{background:#eef4ff;border-inline-start:5px solid #3b6fd1;padding:10px 14px;border-radius:8px}
+.opt{display:block;width:100%;text-align:start;background:var(--w);color:var(--t);border:2px solid var(--pm);margin:6px 0}
+.opt.right{border-color:var(--ok);background:#eefaf4}.opt.wrong{border-color:var(--no);background:#fdeeee}
+.why{font-size:.95rem;color:var(--mu);margin-top:4px}
+input{font:inherit;width:100%;padding:10px 12px;border:2px solid var(--pm);border-radius:10px;margin:4px 0 10px;background:#fff}
+textarea{font:inherit;width:100%;min-height:90px;padding:10px;border:2px solid var(--pm);border-radius:10px}
+.price{font-size:2rem;font-weight:800;color:var(--p)}
+.check li{margin:4px 0}
+.flip{min-height:150px;display:grid;place-items:center;text-align:center;font-size:1.6rem;background:var(--pl);border-radius:14px;padding:20px;margin:10px 0}
+.modal{position:fixed;inset:0;background:rgba(38,23,63,.6);display:none;place-items:center;z-index:20;padding:16px}
+.modal.on{display:grid}.modal .card{width:100%;max-width:420px;max-height:90vh;overflow:auto;margin:0}
+#toast{position:fixed;bottom:18px;inset-inline:16px;margin:auto;max-width:420px;background:var(--pd);color:#fff;padding:12px 16px;border-radius:12px;display:none;z-index:30;text-align:center}
+#sel{position:absolute;display:none;background:var(--pd);border-radius:10px;padding:6px;gap:6px;z-index:15}
+#sel button{padding:6px 12px;background:#fff;color:var(--pd)}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.stat div{background:var(--pl);border-radius:12px;padding:12px;text-align:center}
+.stat b{display:block;font-size:1.5rem;color:var(--pd)}
+@media(prefers-reduced-motion:no-preference){.modal.on .card{animation:pop .2s}@keyframes pop{from{transform:scale(.95);opacity:0}}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<span class="logo" onclick="go('home')">DONIA</span>
+<button class="menuB" id="menuB" aria-label="القائمة" aria-expanded="false" onclick="toggleMenu()">☰</button>
+<nav class="menu" id="menu">
+<button onclick="go('home')">الرئيسية</button>
+<button onclick="go('bank')">بنك الكلمات</button>
+<button onclick="go('cards')">البطاقات</button>
+<button onclick="go('plan')">خطة الدراسة</button>
+<button onclick="go('sub')">الاشتراك</button>
+<button onclick="openTr()">المترجم</button>
+<div id="userbox"></div>
+</nav>
+</div></header>
+<main id="app"></main>
+
+<div class="modal" id="authM"><div class="card">
+<h2 id="authT">تسجيل الدخول</h2>
+<div id="nameW" hidden><label>الاسم</label><input id="aN" autocomplete="name"></div>
+<label>البريد الإلكتروني</label><input id="aE" type="email" autocomplete="email" dir="ltr">
+<label>كلمة المرور (6 أحرف على الأقل)</label><input id="aP" type="password" autocomplete="current-password" dir="ltr">
+<div class="err" id="aErr"></div>
+<div class="row"><button onclick="submitAuth()" id="aGo">دخول</button><button class="ghost" onclick="authMode(mode=='in'?'up':'in')" id="aSw">حساب جديد</button><button class="ghost" onclick="closeM('authM')">إغلاق</button></div>
+</div></div>
+
+<div class="modal" id="trM"><div class="card">
+<h2>المترجم</h2>
+<div class="row"><button class="ghost" id="dirB" onclick="flipDir()">ألماني ← عربي</button></div>
+<textarea id="trIn" placeholder="اكتب هنا"></textarea>
+<div class="row"><button onclick="doTr()">ترجم</button><button class="ghost" onclick="speak(trDir=='de|ar'?$('trIn').value:$('trOut').textContent)">🔊 نطق الألماني</button><button class="ghost" onclick="closeM('trM')">إغلاق</button></div>
+<div id="trOut" class="card" style="min-height:50px"></div>
+</div></div>
+
+<div id="sel"><button onclick="selTr()">ترجمة</button><button onclick="speak(selTxt)">🔊</button></div>
+<div id="toast" role="status"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){toast('تعذّر الحفظ على هذا المتصفح')}}};
+
+/* ===== الإعدادات ===== */
+const PRICE=350;
+const FREE_LESSONS=2;
+const LEVELS={
+ a1:{name:'A1',t:'المستوى A1 (مبتدئ)',d:'وحدتان و16 درسًا مع فيديو وPDF وتدريبات ونطق صوتي.'},
+ a2:{name:'A2',t:'المستوى A2 (مبتدئ متقدم)',d:'المحتوى قيد الإعداد.'},
+ a2p:{name:'A2+',t:'المستوى A2+ (انتقالي بين A2 وB1)',d:'المحتوى قيد الإعداد.'}
+};
+
+/* ===== المحتوى ===== */
+const UNITS = [
+  {
+    t: 'الوحدة الأولى: أول خطوة في الألماني',
+    pdf: 'a1-unit1.pdf',
+    vids: [
+      { t: 'فيديو: أول الحروف', id: 'Fx7BcYx7qEk' },
+      { t: 'فيديو: الحروف (تكملة)', id: 'zQCELvOP5_0' }
+    ]
+  },
+  {
+    t: 'الوحدة الثانية: الجمل اليومية والأساسيات',
+    pdf: 'a1-unit2.pdf',
+    vids: [
+      { t: 'فيديو: النطق والكلمات', id: 'X6LKMOuju7E' },
+      { t: 'فيديو: كلمات وجمل الوحدة الثانية', id: 'rEjipOElwGw' }
+    ]
+  }
+];
+
+// كل درس: t عنوان، g هدف، e شرح، w كلمات [de,ar,نطق]، s جمل [de,ar,استخدام]، m خطأ شائع، q أسئلة [سؤال،[خيارات]،رقم الصحيح،السبب]، r مراجعة
+const L=[
+/* الوحدة 1 */
+{u:0,t:'الحروف الألمانية وطريقة نطقها',g:'تتعرف على الأبجدية الألمانية (26 حرفًا + ä ö ü ß) وتنطق كل حرف بشكل صحيح.',
+v:[{t:'فيديو: أول الحروف',id:'Fx7BcYx7qEk'}],
+pdf:'a1-lesson1.pdf',
+e:'الألمانية تستخدم أبجدية لاتينية مثل الإنجليزية، فيها 26 حرفًا، وتضيف 4 علامات خاصة: ä ö ü ß.<br><br><b>1) الحروف الخاصة:</b><br>ä تُنطق بين «أ» و«إ» (مثل «أَه» بفم مفتوح).<br>ö تُنطق «أُو» مع ضم الشفتين (كأنك تقول «أو» وأنت تقول «إي»).<br>ü تُنطق «إي» مع ضم الشفتين، ولو قلتها بدون ضم هتطلع «إي» عادية، وده غلط.<br>ß تُنطق «س» مضاعفة وطويلة، وتُكتب بعد الحرف المتحرك الطويل.<br><br><b>2) حروف بتتنطق غير الإنجليزي:</b><br>W = «ڤ» (Wasser = ڤاسر).<br>V = «ف» غالبًا (Vater = فاتر).<br>J = «ي» (Ja = يا).<br>Z = «تس» (Zug = تسوك).<br><br><b>3) مجموعات حروف:</b><br>sch = «ش» (Schule = شولِه).<br>ch بعد e أو i = صوت خفيف يشبه «هـ» مهموسة.<br>ei = «آي» (nein = ناين).<br>ie = «ي» طويلة (Wiese = ڤيزه).<br>eu = «أُوي» (heute = هويته).<br>st في أول الكلمة = «شت»، وsp = «شپ».<br><br><b>4) قاعدة الطول:</b> الحرف المتحرك المتبوع بحرف واحد يكون طويلًا (Name)، والمتبوع بحرفين يكون قصيرًا (Mutter).<br><br><b>5) نهاية الكلمة:</b> b تتحول إلى «پ»، d إلى «ت»، g إلى «كـ» (Dieb = ديپ، Hund = هونت).',
+w:[['Schule','مدرسة','شُولِه'],['Straße','شارع','شتراسِه'],['Wasser','ماء','ڤاسر'],['Zug','قطار','تسوك'],['Hund','كلب','هونت'],['Vater','أب','فاتر'],['Äpfel','تفاحات','إبفِل'],['Ja','نعم','يا']],
+s:[['Das ist Wasser.','هذا ماء.','تعريف بشيء قريب'],['Ich lerne Deutsch.','أنا أتعلم الألمانية.','جملة تعبّر عن نفسك'],['Der Hund ist groß.','الكلب كبير.','وصف']],
+m:'لا تنطق W كـ «و» ولا J كـ «ج». الصحيح W = «ڤ» وJ = «ي». وكمان لا تنطق d في آخر الكلمة «د»، بل «ت».',
+q:[['كيف تُنطق sch في Schule؟',['س','ش','ك'],1,'sch دائمًا «ش».'],['حرف W في Wasser يُنطق:',['و','ڤ','ب'],1,'W في الألمانية = «ڤ».'],['كيف تُنطق d في آخر كلمة Hund؟',['د','ت','ض'],1,'في آخر الكلمة تتحول d إلى «ت».']],
+r:'ä ö ü ß حروف خاصة، sch = ش، ei = آي، ie = ي، W = ڤ، V = ف، J = ي، Z = تس، وفي آخر الكلمة b = پ وd = ت وg = كـ.'},
+
+{u:0,t:'التحيات والوداع والتعبيرات اليومية',g:'تحيّي وتسأل عن الحال وتودّع بالألمانية بثقة في المواقف اليومية.',
+v:[{t:'فيديو: النطق والكلمات',id:'X6LKMOuju7E'}],
+pdf:'a1-lesson2.pdf',
+e:'<b>1) التحية حسب الوقت:</b><br>Guten Morgen = صباح الخير (قبل الظهر).<br>Guten Tag = نهارك سعيد (من الظهر حتى المساء).<br>Guten Abend = مساء الخير (بعد المغرب تقريبًا).<br>Gute Nacht = تصبح على خير (للنوم فقط، مش للتحية).<br><br><b>2) التحية البسيطة:</b> Hallo تُقال في أي وقت مع الأصدقاء.<br><br><b>3) السؤال عن الحال:</b> Wie geht’s? (كيف حالك؟) والرد الشائع: Danke, gut! (شكرًا، بخير!). ولو عايز ترد وتسأل: Und dir? (وانت؟).<br><br><b>4) الوداع:</b><br>Tschüss = وداعًا (مع الأصدقاء).<br>Auf Wiedersehen = مع السلامة (في المواقف الرسمية).<br>Bis bald = أراك قريبًا.<br><br><b>5) الشكر والاعتذار:</b> Danke للشكر، والرد عليه Bitte (عفوًا). ولو غلطت قول Entschuldigung.',
+w:[['Hallo','مرحبًا','هالو'],['Guten Morgen','صباح الخير','جوتن مورغن'],['Guten Tag','نهارك سعيد','جوتن تاك'],['Guten Abend','مساء الخير','جوتن آبند'],['Gute Nacht','تصبح على خير','گوتِه ناخت'],['Wie geht’s?','كيف حالك؟','في غيتس'],['Danke','شكرًا','دانكِه'],['Bitte','عفوًا / من فضلك','بِتّه'],['Tschüss','وداعًا','تشوس'],['Auf Wiedersehen','مع السلامة','أوف فيدرزين'],['Entschuldigung','عذرًا / آسف','إنتشولديغونغ']],
+s:[['Guten Morgen, wie geht’s?','صباح الخير، كيف حالك؟','سؤال ودّي في الصباح'],['Danke, gut! Und dir?','شكرًا، بخير! وانت؟','الرد وسؤال مقابل'],['Tschüss, bis bald!','وداعًا، أراك قريبًا!','وداع بين الأصدقاء']],
+m:'لا تقل Guten Tag في الصباح ولا Guten Morgen في المساء. وGute Nacht للنوم فقط.',
+q:[['تحية الصباح هي:',['Guten Abend','Guten Morgen','Tschüss'],1,'Morgen = صباح.'],['وداع مناسب للأصدقاء:',['Auf Wiedersehen','Tschüss','Guten Tag'],1,'Tschüss غير رسمي، فهو مناسب للأصدقاء.'],['كيف ترد على Danke؟',['Bitte','Tschüss','Hallo'],0,'Bitte = عفوًا.']],
+r:'Morgen للصباح، Tag للنهار، Abend للمساء، Nacht للنوم، Tschüss للأصدقاء، Wiedersehen للمواقف الرسمية.'},
+
+{u:0,t:'التعريف بالنفس: الاسم والبلد والسكن',g:'تقدّم نفسك بجمل كاملة.',
+e:'لتقول اسمك: Ich heiße + الاسم. لبلدك: Ich komme aus + البلد. لمكان السكن: Ich wohne in + المدينة. للسؤال: Wie heißt du? / Woher kommst du? / Wo wohnst du?',
+w:[['Ich heiße','اسمي','إش هايسه'],['Ich komme aus','أنا قادم من','إش كومّه آوس'],['Ich wohne in','أسكن في','إش ڤونه إن'],['Ägypten','مصر','إيغيبتن'],['Kairo','القاهرة','كايرو']],
+s:[['Ich heiße Ali.','اسمي علي.','للتعريف'],['Ich komme aus Ägypten.','أنا من مصر.','للتعريف بالبلد'],['Ich wohne in Kairo.','أسكن في القاهرة.','للمدينة']],
+m:'لا تقل «Ich bin heiße»؛ الصحيح Ich heiße.',
+q:[['كيف تسأل: ما اسمك؟',['Wo wohnst du?','Wie heißt du?','Woher kommst du?'],1,'Wie heißt du؟ = ما اسمك؟']],
+r:'heißen للاسم، kommen aus للبلد، wohnen in للسكن.'},
+
+{u:0,t:'الأرقام والعمر ورقم الهاتف',g:'تعدّ من 0 إلى 10 وتقول عمرك.',
+e:'تُقرأ أرقام الهاتف رقمًا رقمًا. للعمر: Ich bin 20 Jahre alt. وللسؤال: Wie alt bist du؟',
+w:[['null','0','نُل'],['eins','1','آينس'],['zwei','2','تسڤاي'],['drei','3','درای'],['vier','4','فير'],['fünf','5','فونف'],['sechs','6','زِكس'],['sieben','7','زيبن'],['acht','8','آخت'],['neun','9','نوين'],['zehn','10','تسين']],
+s:[['Ich bin zwanzig Jahre alt.','عمري عشرون سنة.','للعمر'],['Meine Nummer ist eins zwei drei.','رقمي 123.','للهاتف']],
+m:'لا تقل Ich habe 20 Jahre؛ الألمانية تستخدم sein: Ich bin 20.',
+q:[['«ثلاثة» بالألمانية:',['drei','vier','zwei'],0,'drei = 3.']],
+r:'0-10: null … zehn. العمر مع bin + Jahre alt.'},
+
+{u:0,t:'مفردات أساسية وتدريبات',g:'تتعلم أشياء يومية وتراجع ما سبق.',
+e:'كل اسم ألماني له أداة تعريف (der/die/das) وسنشرحها في الوحدة الثانية. احفظ الاسم مع أداته من الآن.',
+w:[['das Buch','الكتاب','داس بوخ'],['der Tisch','الطاولة','ديـر تيش'],['das Haus','البيت','داس هاوس'],['die Tasche','الحقيبة','دي تاشه'],['das Wasser','الماء','داس ڤاسر']],
+s:[['Das ist ein Buch.','هذا كتاب.','للتعريف بشيء']],
+m:'لا تحفظ الاسم وحده، احفظه مع der/die/das.',
+q:[['«البيت» بالألمانية:',['das Haus','der Tisch','die Tasche'],0,'Haus = بيت.']],
+r:'احفظ الاسم مع أداته.'},
+
+{u:0,t:'تكوين جمل بسيطة وترتيب الكلمات',g:'ترتّب الجملة الألمانية الصحيحة.',
+e:'في الجملة الخبرية يأتي الفعل في المرتبة الثانية دائمًا: الفاعل + الفعل + الباقي. مثال: Ich lerne Deutsch. وإن بدأت بزمن: Heute lerne ich Deutsch (الفعل ما زال ثانيًا).',
+w:[['heute','اليوم','هويته'],['lerne','أتعلم','لِرنه'],['Deutsch','الألمانية','دويتش']],
+s:[['Ich lerne Deutsch.','أتعلم الألمانية.','جملة أساسية'],['Heute lerne ich Deutsch.','اليوم أتعلم الألمانية.','الفعل ثانٍ']],
+m:'لا تقل Heute ich lerne؛ الفعل يجب أن يبقى ثانيًا.',
+q:[['الجملة الصحيحة:',['Heute ich lerne Deutsch','Heute lerne ich Deutsch','Lerne heute Deutsch ich'],1,'الفعل في المرتبة الثانية.']],
+r:'الفعل ثانيًا دائمًا في الجملة الخبرية.'},
+
+{u:0,t:'الاستماع والتكرار والتدريب على النطق',g:'تتدرب على الاستماع والتقليد.',
+e:'اضغط 🔊 واستمع، ثم كرّر بصوت عالٍ ثلاث مرات. ركّز على الحروف الخاصة. كتابة النطق بالعربي تقريبية فقط ولا تغني عن الصوت الحقيقي.',
+w:[['Guten Tag','نهارك سعيد','جوتن تاك'],['Ich heiße Ali','اسمي علي','إش هايسه علي'],['Wie geht’s?','كيف حالك؟','في غيتس']],
+s:[['Ich komme aus Ägypten.','أنا من مصر.','كرّرها بصوت واضح']],
+m:'القراءة بالنطق العربي وحده تُرسّخ أخطاء؛ اعتمد على الصوت.',
+q:[['أفضل طريقة للنطق:',['قراءة الحروف العربية فقط','الاستماع والتكرار','تجاهل النطق'],1,'الاستماع والتقليد.']],
+r:'استمع ثم كرّر.'},
+
+{u:0,t:'مراجعة شاملة واختبار الوحدة',g:'تختبر ما تعلمته.',
+e:'راجع التحيات والتعريف بالنفس والأرقام وترتيب الجملة، ثم أجب.',
+w:[['Ich heiße','اسمي','إش هايسه'],['Danke','شكرًا','دانكِه']],
+s:[['Ich bin zwanzig Jahre alt.','عمري عشرون.','']],
+m:'لا تتجاهل ترتيب الفعل.',
+q:[['«شكرًا»:',['Bitte','Danke','Tschüss'],1,'Danke = شكرًا.'],['«أسكن في»:',['Ich wohne in','Ich heiße','Ich bin'],0,'wohnen = يسكن.']],
+r:'أنهيت الوحدة الأولى.'},
+
+/* الوحدة 2 */
+{u:1,t:'أدوات التعريف der / die / das وجنس الأسماء',g:'تفهم أن لكل اسم جنسًا وتحفظ الاسم مع أداته.',
+e:'للأسماء ثلاثة أجناس: مذكر der، مؤنث die، محايد das، والجمع كله die. لا توجد قاعدة قاطعة، فاحفظ كل اسم مع أداته. تنبيه: الجنس نحوي وليس منطقيًا (das Mädchen = البنت محايد).',
+w:[['der Mann','الرجل','ديـر مان'],['die Frau','المرأة','دي فراو'],['das Kind','الطفل','داس كيند'],['der Tisch','الطاولة','ديـر تيش'],['die Lampe','المصباح','دي لامبه']],
+s:[['Der Mann ist hier.','الرجل هنا.','مذكر'],['Das Kind lernt.','الطفل يتعلم.','محايد']],
+m:'لا تخمّن الجنس من المعنى؛ احفظه مع الاسم.',
+q:[['أداة «Frau»:',['der','die','das'],1,'die Frau.'],['أداة «Kind»:',['der','die','das'],2,'das Kind.']],
+r:'der مذكر، die مؤنث وجمع، das محايد.'},
+
+{u:1,t:'الضمائر وتصريف sein وhaben',g:'تستخدم ضمائر الفاعل وتصرّف أهم فعلين.',
+e:'الضمائر: ich أنا، du أنتَ، er هو، sie هي، es هو/هي لغير العاقل، wir نحن، ihr أنتم، sie/Sie هم/حضرتك. sein (يكون): ich bin, du bist, er ist, wir sind, ihr seid, sie sind. haben (يملك): ich habe, du hast, er hat, wir haben, ihr habt, sie haben.',
+w:[['ich bin','أنا (أكون)','إش بن'],['du bist','أنت','دو بيست'],['er ist','هو','إير إست'],['ich habe','أنا أملك','إش هابه'],['er hat','هو يملك','إير هات']],
+s:[['Ich bin Student.','أنا طالب.','وصف'],['Ich habe ein Buch.','لدي كتاب.','ملكية']],
+m:'لا تقل Ich habe 20 Jahre؛ الصحيح Ich bin 20.',
+q:[['هو يملك:',['er ist','er hat','er habe'],1,'er hat.'],['أنت (تكون):',['du bist','du habe','du ist'],0,'du bist.']],
+r:'sein للوصف والهوية، haben للملكية.'},
+
+{u:1,t:'العائلة والملكية mein / meine',g:'تتحدث عن عائلتك وتستخدم أدوات الملكية.',
+e:'mein مع المذكر والمحايد، meine مع المؤنث والجمع. مثال: mein Vater، meine Mutter، mein Kind.',
+w:[['der Vater','الأب','ديـر فاتر'],['die Mutter','الأم','دي موتر'],['der Bruder','الأخ','ديـر برودر'],['die Schwester','الأخت','دي شفستر']],
+s:[['Das ist meine Mutter.','هذه أمي.','تعريف'],['Mein Bruder heißt Omar.','اسم أخي عمر.','وصف']],
+m:'لا تقل mein Mutter؛ الصحيح meine Mutter.',
+q:[['«أختي»:',['mein Schwester','meine Schwester','meinen Schwester'],1,'Schwester مؤنث → meine.']],
+r:'mein مذكر/محايد، meine مؤنث/جمع.'},
+
+{u:1,t:'الأفعال المنتظمة في المضارع',g:'تصرّف الأفعال المنتظمة.',
+e:'انزع النهاية en من المصدر وأضف: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie -en. مثال lernen: ich lerne, du lernst, er lernt, wir lernen.',
+w:[['lernen','يتعلم','لِرنن'],['wohnen','يسكن','ڤونن'],['machen','يفعل','ماخن'],['spielen','يلعب','شبيلن']],
+s:[['Du lernst Deutsch.','أنت تتعلم الألمانية.','مخاطب'],['Wir wohnen in Kairo.','نسكن في القاهرة.','جمع']],
+m:'لا تنسَ st مع du.',
+q:[['du + machen:',['du mache','du machst','du macht'],1,'du → -st.']],
+r:'e / st / t / en / t / en.'},
+
+{u:1,t:'الطعام والشراب وطلب الأشياء بأدب',g:'تطلب طعامًا بأدب.',
+e:'للطلب المهذب: Ich möchte + المطلوب. أو Kann ich … haben? وللشكر: Danke / Bitte.',
+w:[['das Brot','الخبز','داس بروت'],['der Kaffee','القهوة','ديـر كافيه'],['das Wasser','الماء','داس ڤاسر'],['der Tee','الشاي','ديـر تيه']],
+s:[['Ich möchte einen Tee, bitte.','أريد شايًا من فضلك.','في مطعم'],['Das Wasser, bitte.','الماء من فضلك.','طلب مختصر']],
+m:'لا تنسَ bitte في الطلب.',
+q:[['طلب مهذب:',['Ich will Tee','Ich möchte Tee','Gib Tee'],1,'möchte أكثر لباقة.']],
+r:'Ich möchte … , bitte.'},
+
+{u:1,t:'تكوين الأسئلة باستخدام أدوات السؤال',g:'تسأل بأدوات السؤال.',
+e:'أدوات السؤال: was ماذا، wer من، wo أين، woher من أين، wie كيف، wann متى. ترتيبها: أداة السؤال + الفعل + الفاعل. وأسئلة نعم/لا تبدأ بالفعل: Lernst du Deutsch؟',
+w:[['Was','ماذا','ڤاس'],['Wer','من','ڤير'],['Wo','أين','ڤو'],['Wie','كيف','في'],['Wann','متى','ڤان']],
+s:[['Wo wohnst du?','أين تسكن؟','سؤال عن المكان'],['Lernst du Deutsch?','هل تتعلم الألمانية؟','نعم/لا']],
+m:'لا تضع الفاعل قبل الفعل في السؤال.',
+q:[['سؤال صحيح:',['Wo du wohnst?','Wo wohnst du?','Du wo wohnst?'],1,'أداة السؤال ثم الفعل.']],
+r:'أداة سؤال + فعل + فاعل.'},
+
+{u:1,t:'النفي باستخدام nicht وkein',g:'تنفي الجمل بشكل صحيح.',
+e:'kein ينفي الأسماء المسبوقة بـ ein أو بدون أداة: Ich habe kein Auto. nicht ينفي الفعل أو الصفة أو الجملة: Ich komme nicht. وتُصرَّف kein مثل mein.',
+w:[['nicht','ليس / لا','نيشت'],['kein','لا … أي','كاين'],['nein','لا','ناين']],
+s:[['Ich habe kein Auto.','ليس لدي سيارة.','نفي اسم'],['Ich lerne nicht.','أنا لا أتعلم.','نفي فعل']],
+m:'لا تقل Ich habe nicht Auto؛ الصحيح kein Auto.',
+q:[['«ليس لدي كتاب»:',['Ich habe nicht Buch','Ich habe kein Buch','Ich nicht habe Buch'],1,'kein مع الاسم.']],
+r:'kein للأسماء، nicht لغيرها.'},
+
+{u:1,t:'مراجعة شاملة ومحادثات واختبار الوحدة',g:'تختبر الوحدة الثانية.',
+e:'محادثة: A: Hallo! Wie heißt du? B: Ich heiße Sara. Und du؟ A: Ich bin Ali. Ich komme aus Ägypten.',
+w:[['Und du?','وأنت؟','أونت دو']],
+s:[['Ich möchte einen Tee, bitte.','أريد شايًا.','']],
+m:'راجع أدوات التعريف والتصريف.',
+q:[['«أنا أملك»:',['ich bin','ich habe','ich hat'],1,'haben.'],['أداة Tisch:',['der','die','das'],0,'der Tisch.']],
+r:'أنهيت المستوى A1 بنجاح.'}
+];
+
+/* ===== الحالة والحفظ ===== */
+let user=LS.get('donia_cur',null),mode='in',view={p:'home'};
+let cIdx=0,cShow=false,cDeck=[],bq='',bu='all',bf=false,voices=[],trDir='de|ar',selTxt='';
+const pk=()=>'donia_prog_'+(user?user.email:'guest');
+const sk=()=>'donia_sub_'+(user?user.email:'guest');
+const fk=()=>'donia_fav_'+(user?user.email:'guest');
+const prog=()=>LS.get(pk(),{});
+const done=i=>!!prog()[i];
+const favs=()=>LS.get(fk(),[]);
+const isPaid=()=>!!LS.get(sk(),false);
+const locked=i=>!isPaid()&&i>=FREE_LESSONS;
+const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.charCodeAt(0))|0;return String(h)};
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',3500)}
+function openM(i){$(i).classList.add('on')}
+function closeM(i){$(i).classList.remove('on')}
+function toggleMenu(force){const m=$('menu'),o=force===undefined?!m.classList.contains('on'):force;m.classList.toggle('on',o);$('menuB').setAttribute('aria-expanded',o)}
+document.addEventListener('click',e=>{if(!e.target.closest('header'))toggleMenu(false)});
+
+/* ===== الحسابات ===== */
+function authMode(m){mode=m;$('authT').textContent=m=='in'?'تسجيل الدخول':'حساب جديد';$('nameW').hidden=m=='in';$('aGo').textContent=m=='in'?'دخول':'إنشاء حساب';$('aSw').textContent=m=='in'?'حساب جديد':'لدي حساب';$('aErr').textContent=''}
+function submitAuth(){
+ const e=$('aE').value.trim().toLowerCase(),p=$('aP').value,n=$('aN').value.trim(),us=LS.get('donia_users',{});
+ if(!/^\S+@\S+\.\S+$/.test(e))return $('aErr').textContent='اكتب بريدًا إلكترونيًا صحيحًا.';
+ if(p.length<6)return $('aErr').textContent='كلمة المرور أقل من 6 أحرف.';
+ if(mode=='up'){
+  if(!n)return $('aErr').textContent='اكتب اسمك.';
+  if(us[e])return $('aErr').textContent='هذا البريد مسجّل بالفعل، سجّل الدخول.';
+  us[e]={name:n,h:hash(p)};LS.set('donia_users',us);
+ }else if(!us[e]||us[e].h!==hash(p))return $('aErr').textContent='البريد أو كلمة المرور غير صحيحة.';
+ user={email:e,name:us[e].name};LS.set('donia_cur',user);closeM('authM');
+ $('aP').value='';toast('أهلًا '+user.name);render();
+}
+function logout(){user=null;LS.set('donia_cur',null);toast('تم تسجيل الخروج');go('home')}
+function openAuth(m){authMode(m);openM('authM')}
+
+/* ===== النطق الصوتي ===== */
+function loadV(){voices=speechSynthesis.getVoices()}
+if('speechSynthesis' in window){loadV();speechSynthesis.onvoiceschanged=loadV}
+function getDe(){return voices.find(v=>v.lang.replace('_','-').toLowerCase()=='de-de')||voices.find(v=>v.lang.toLowerCase().startsWith('de'))}
+async function speak(t){
+ if(!t)return;
+ if(!('speechSynthesis' in window))return toast('متصفحك لا يدعم النطق الصوتي.');
+ if(!voices.length){for(let i=0;i<15&&!voices.length;i++){await new Promise(r=>setTimeout(r,200));loadV()}}
+ const v=getDe();
+ if(!v)return toast('لا يوجد صوت ألماني على جهازك. ثبّت صوت الألمانية (de-DE) من إعدادات النظام ثم أعد المحاولة.');
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.voice=v;u.lang='de-DE';u.rate=.85;
+ setTimeout(()=>speechSynthesis.speak(u),60);
+}
+const sp=t=>`<button class="sp" aria-label="استمع" onclick="speak(this.dataset.t)" data-t="${esc(t)}">🔊</button>`;
+
+/* ===== الفيديوهات ===== */
+const vidHTML=list=>list.map(v=>`<h3>${esc(v.t)}</h3><div class="vid"><iframe src="https://www.youtube.com/embed/${v.id}" title="${esc(v.t)}" allowfullscreen loading="lazy"></iframe></div><div class="row"><a class="btn ghost" href="https://youtu.be/${v.id}" target="_blank" rel="noopener">افتح على يوتيوب</a></div>`).join('');
+
+/* ===== ملفات PDF من مجلد المشروع =====
+   ضعي ملفات PDF في نفس مجلد index.html.
+   لا يوجد اختيار ملفات من الجهاز؛ المسارات ثابتة.
+*/
+function pdfBlock(key,file){
+ if(!file)return '';
+ const path='./'+file;
+ return `<div class="card">
+   <h3>📘 ملف الشرح PDF</h3>
+   <iframe class="pdf" id="pdf-${key}" src="${path}" title="ملف الشرح PDF" loading="lazy"></iframe>
+   <div class="row">
+     <a class="btn" href="${path}" target="_blank" rel="noopener">📖 فتح ملف PDF</a>
+     <a class="btn ghost" href="${path}" download="${file}">⬇️ تحميل PDF</a>
+   </div>
+ </div>`;
+}
+
+/* ===== المترجم ===== */
+function openTr(t){if(t)$('trIn').value=t;toggleMenu(false);openM('trM')}
+function flipDir(){trDir=trDir=='de|ar'?'ar|de':'de|ar';$('dirB').textContent=trDir=='de|ar'?'ألماني ← عربي':'عربي ← ألماني'}
+async function doTr(){
+ const q=$('trIn').value.trim();if(!q)return;$('trOut').textContent='جارٍ الترجمة…';
+ try{const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(q)+'&langpair='+trDir);
+ const j=await r.json();$('trOut').textContent=j.responseData.translatedText||'لا توجد ترجمة.'}
+ catch(e){$('trOut').textContent='تعذّرت الترجمة. تأكد من اتصالك بالإنترنت.'}
+}
+function selTr(){trDir=/[\u0600-\u06FF]/.test(selTxt)?'ar|de':'de|ar';$('dirB').textContent=trDir=='de|ar'?'ألماني ← عربي':'عربي ← ألماني';openTr(selTxt);doTr();$('sel').style.display='none'}
+function checkSel(){
+ setTimeout(()=>{const s=getSelection(),t=s.toString().trim(),b=$('sel');
+ if(t&&t.length<200&&s.anchorNode&&!s.anchorNode.parentElement.closest('textarea,input,.modal')){selTxt=t;const r=s.getRangeAt(0).getBoundingClientRect();
+  b.style.display='flex';b.style.top=(window.scrollY+r.top-52)+'px';b.style.left=Math.max(8,Math.min(innerWidth-130,r.left+window.scrollX))+'px'}
+ else b.style.display='none'},50)}
+document.addEventListener('mouseup',checkSel);document.addEventListener('touchend',checkSel);
+
+/* ===== التنقل والعرض ===== */
+function go(p,i){view={p,i};toggleMenu(false);render();scrollTo(0,0)}
+function render(){
+ $('userbox').innerHTML=user?`<div>${esc(user.name)}</div><button class="ghost" onclick="logout()" style="margin-top:6px">خروج</button>`:`<button class="ghost" onclick="openAuth('in');toggleMenu(false)">دخول الطالب</button>`;
+ const a=$('app');
+ if(view.p=='home')a.innerHTML=home();
+ else if(view.p=='level')a.innerHTML=levelPage(view.i);
+ else if(view.p=='unit')a.innerHTML=unit(view.i);
+ else if(view.p=='bank'){a.innerHTML=isPaid()?bank():lockPage('بنك الكلمات');if(isPaid())drawBank()}
+ else if(view.p=='cards')a.innerHTML=isPaid()?cardsPage():lockPage('بطاقات المراجعة');
+ else if(view.p=='plan')a.innerHTML=isPaid()?planPage():lockPage('خطة الدراسة');
+ else if(view.p=='sub')a.innerHTML=subPage();
+ else a.innerHTML=lesson(view.i);
+}
+const idsOf=u=>L.map((l,i)=>l.u==u?i:-1).filter(i=>i>=0);
+const a1Done=()=>L.filter((l,i)=>done(i)).length;
+const backBtn=(to,label,arg)=>`<div class="row"><button class="ghost" onclick="go('${to}'${arg!==undefined?','+arg:''})">${label}</button></div>`;
+
+function lockPage(name){
+ return `${backBtn('home','الرئيسية')}<h2>${name}</h2>
+ <div class="card lock"><h3>هذا القسم للمشتركين</h3><p>اشترك لفتح ${name} وكل محتوى المستوى A1.</p>
+ <div class="row" style="justify-content:center"><button onclick="go('sub')">الاشتراك (${PRICE} جنيه / شهريًا)</button></div></div>`;
+}
+
+function home(){
+ const d=a1Done(),pct=Math.round(d/16*100);
+ return `<section class="hero"><h1>${user?'أهلًا '+esc(user.name)+' 👋':'تعلّم الألمانية من الصفر'}</h1><p>اختر مستواك: A1 جاهز الآن، وA2 وA2+ قريبًا.</p>
+ ${user?'':'<div class="row"><button style="background:#fff;color:var(--pd)" onclick="openAuth(\'up\')">أنشئ حسابك لحفظ تقدمك</button></div>'}</section>
+ <div class="card"><div class="stat">
+   <div><b>${d}/16</b>دروس مكتملة</div>
+   <div><b>${pct}%</b>نسبة التقدم</div>
+   <div><b>${isPaid()?'مفعّل':'غير مفعّل'}</b>الاشتراك</div>
+ </div></div>
+ <h2>المستويات</h2>
+ <div class="units">
+  <div class="card unit" tabindex="0" onclick="go('level','a1')" onkeydown="if(event.key=='Enter')go('level','a1')"><h2>${LEVELS.a1.t}</h2><p>${LEVELS.a1.d}</p><p>أنجزت ${d} من 16 درسًا</p><div class="prog"><i style="width:${pct}%"></i></div></div>
+  <div class="card soon" tabindex="0" onclick="go('level','a2')" onkeydown="if(event.key=='Enter')go('level','a2')"><h2>${LEVELS.a2.t}</h2><p>قريبًا: المحتوى قيد الإعداد</p></div>
+  <div class="card soon" tabindex="0" onclick="go('level','a2p')" onkeydown="if(event.key=='Enter')go('level','a2p')"><h2>${LEVELS.a2p.t}</h2><p>قريبًا: المحتوى قيد الإعداد</p></div>
+ </div>`;
+}
+function levelPage(id){
+ if(id=='a1')return a1Page();
+ const lv=LEVELS[id];
+ return `${backBtn('home','الرئيسية')}<h2>${lv.t}</h2>
+ <div class="card"><b>المحتوى قيد الإعداد</b><p>سيُضاف محتوى ${lv.name} قريبًا.</p></div>`;
+}
+function a1Page(){
+ const total=a1Done();
+ return `${backBtn('home','الرئيسية')}<h2>${LEVELS.a1.t}</h2>
+ <div class="card">أنجزت ${total} من 16 درسًا<div class="prog"><i style="width:${total/16*100}%"></i></div></div>
+ <div class="units">${UNITS.map((u,k)=>{const d=idsOf(k).filter(done).length;return `<div class="card unit" tabindex="0" onclick="go('unit',${k})" onkeydown="if(event.key=='Enter')go('unit',${k})"><h2>${u.t}</h2><p>8 دروس • ${d} مكتمل</p><div class="prog"><i style="width:${d/8*100}%"></i></div></div>`}).join('')}</div>`;
+}
+function unit(k){
+ const u=UNITS[k];
+ const media=isPaid()
+  ?`<div class="card"><h3>فيديوهات الوحدة</h3>${vidHTML(u.vids)}</div>${pdfBlock('u'+k,u.pdf)}`
+  :`<div class="card lock"><h3>فيديوهات وملف PDF للوحدة للمشتركين</h3><p>الدرسان الأولان مفتوحان للمعاينة. اشترك لفتح باقي المحتوى.</p><div class="row" style="justify-content:center"><button onclick="go('sub')">الاشتراك</button></div></div>`;
+ return `${backBtn('level','المستوى A1','\'a1\'')}<h2>${u.t}</h2>
+ ${media}
+ <h3>دروس الوحدة</h3><ul class="lessons">${idsOf(k).map((i,n)=>`<li class="${done(i)?'done':''} ${locked(i)?'locked':''}" tabindex="0" onclick="go('lesson',${i})" onkeydown="if(event.key=='Enter')go('lesson',${i})"><span class="n">${done(i)?'✓':locked(i)?'🔒':n+1}</span>${L[i].t}</li>`).join('')}</ul>`;
+}
+function lesson(i){
+ const l=L[i];
+ const back=backBtn('unit','الوحدة',l.u);
+ if(locked(i))return `${back}<div class="card lock"><h2>الدرس ${i+1}: ${l.t}</h2><p>هذا الدرس للمشتركين.</p><div class="row" style="justify-content:center"><button onclick="go('sub')">الاشتراك (${PRICE} جنيه / شهريًا)</button></div></div>`;
+ return `${back}
+ <div class="card"><h2>الدرس ${i+1}: ${l.t}</h2>
+ ${l.v?`<h3>فيديو الدرس</h3>${vidHTML(l.v)}`:''}
+ <h3>أهداف الدرس</h3><p>${l.g}</p>
+ <h3>الشرح</h3><p>${l.e}</p>
+ <h3>الكلمات</h3><div style="overflow-x:auto"><table><tr><th>ألماني</th><th>المعنى</th><th>النطق التقريبي</th><th></th></tr>
+ ${l.w.map(w=>`<tr><td class="de">${w[0]}</td><td>${w[1]}</td><td>${w[2]}</td><td>${sp(w[0])}</td></tr>`).join('')}</table></div>
+ <h3>جمل عملية</h3>${l.s.map(s=>`<p><span class="de">${s[0]}</span> ${sp(s[0])}<br>${s[1]} ${s[2]?'<small style="color:var(--mu)">('+s[2]+')</small>':''}</p>`).join('')}
+ <h3>خطأ شائع</h3><div class="warn">${l.m}</div>
+ <h3>تدريبات</h3>${l.q.map((q,n)=>`<div class="card" id="q${n}"><b>${q[0]}</b>${q[1].map((o,k)=>`<button class="opt" onclick="ans(${i},${n},${k})">${o}</button>`).join('')}<div class="why" id="w${n}"></div></div>`).join('')}
+ ${typed(i)}<h3>مراجعة مختصرة</h3><p>${l.r}</p>
+ <div class="row"><button id="doneB" onclick="mark(${i})">${done(i)?'✓ مكتمل (إلغاء)':'تحديد الدرس كمكتمل'}</button></div></div>
+ ${l.pdf ? pdfBlock('l'+i,l.pdf) : ''}
+ <div class="nav"><button class="ghost" ${i?'':'disabled'} onclick="go('lesson',${i-1})">الدرس السابق</button><button class="ghost" ${i<15?'':'disabled'} onclick="go('lesson',${i+1})">الدرس التالي</button></div>`;
+}
+function ans(i,n,k){
+ const q=L[i].q[n],box=$('q'+n).querySelectorAll('.opt');
+ box.forEach((b,j)=>{b.disabled=true;if(j==q[2])b.classList.add('right');else if(j==k)b.classList.add('wrong')});
+ $('w'+n).textContent=(k==q[2]?'إجابة صحيحة. ':'إجابة خاطئة. ')+q[3];
+}
+
+/* ===== تفاعلات إضافية ===== */
+const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const SCHED_KEY=()=>'donia_sched_'+(user?user.email:'guest');
+const schedData=()=>LS.get(SCHED_KEY(),{days:3,start:'',done:[]});
+function schedSet(k,v){const s=schedData();s[k]=k=='days'?Number(v):v;LS.set(SCHED_KEY(),s);render()}
+function schedDone(id){const s=schedData(),k=s.done.indexOf(id);k<0?s.done.push(id):s.done.splice(k,1);LS.set(SCHED_KEY(),s);render()}
+const nrm=s=>String(s).trim().toLowerCase().replace(/^(der|die|das)\s+/,'').replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[’`]/g,"'").replace(/\s+/g,' ');
+function typed(i){
+ return `<h3>تدريب كتابة</h3><div class="card"><p>اكتب الكلمة الألمانية لكل معنى عربي، ثم اضغط تحقق أو Enter:</p>
+ ${L[i].w.map(w=>`<div class="row" style="align-items:center"><span style="min-width:110px">${w[1]}</span><input class="tIn" dir="ltr" data-de="${esc(w[0])}" placeholder="الكلمة بالألماني" style="flex:1;min-width:160px;margin:0" onkeydown="if(event.key=='Enter')chkT(this)"><button class="ghost" onclick="chkT(this.previousElementSibling)">تحقق</button><span class="why tRes"></span></div>`).join('')}</div>`;
+}
+function chkT(inp){
+ const res=inp.parentElement.querySelector('.tRes'),ok=nrm(inp.value)==nrm(inp.dataset.de);
+ res.textContent=ok?'✓ صحيح':'✗ الصحيح: '+inp.dataset.de;
+ res.style.color=ok?'var(--ok)':'var(--no)';
+ inp.style.borderColor=ok?'var(--ok)':'var(--no)';
+}
+function speakList(){
+ const l=bankList();if(!l.length)return toast('لا توجد كلمات للاستماع.');
+ if(!('speechSynthesis' in window))return toast('متصفحك لا يدعم النطق الصوتي.');
+ if(!voices.length)loadV();
+ const v=getDe();if(!v)return toast('لا يوجد صوت ألماني على جهازك.');
+ speechSynthesis.cancel();
+ setTimeout(()=>{l.forEach(w=>{const u=new SpeechSynthesisUtterance(w.de);u.voice=v;u.lang='de-DE';u.rate=.85;speechSynthesis.speak(u)})},60);
+ toast('جارٍ تشغيل '+l.length+' كلمة.');
+}
+function mark(i){const p=prog();p[i]=!p[i];LS.set(pk(),p);render();toast(p[i]?'أحسنت! تم حفظ تقدمك.':'تم إلغاء الإكمال.')}
+
+/* ===== بنك الكلمات ===== */
+function allWords(){const m=new Map();L.forEach((l,i)=>l.w.forEach(w=>{if(!m.has(w[0]))m.set(w[0],{de:w[0],ar:w[1],pr:w[2],u:l.u,i})}));return[...m.values()]}
+function bankList(){const f=favs(),q=bq.trim().toLowerCase();
+ return allWords().filter(w=>(bu=='all'||w.u==bu)&&(!bf||f.includes(w.de))&&(!q||w.de.toLowerCase().includes(q)||w.ar.includes(q)))}
+function bank(){return `${backBtn('home','الرئيسية')}<h2>بنك الكلمات</h2>
+ <div class="card"><input id="bS" placeholder="ابحث بالألماني أو بالعربي" value="${esc(bq)}" oninput="bq=this.value;drawBank()">
+ <div class="row"><button class="ghost" onclick="bu='all';drawBank()">الكل</button><button class="ghost" onclick="bu=0;drawBank()">الوحدة 1</button><button class="ghost" onclick="bu=1;drawBank()">الوحدة 2</button><button class="ghost" onclick="bf=!bf;drawBank()">⭐ المفضلة</button><button class="ghost" onclick="speakList()">🔊 استمع للقائمة</button><button onclick="copyBank()">نسخ القائمة</button></div>
+ <div id="bC" style="color:var(--mu)"></div></div><div class="card" id="bL" style="overflow-x:auto"></div>`}
+function drawBank(){const l=bankList(),f=favs();
+ $('bC').textContent=l.length+' كلمة'+(bf?' (المفضلة فقط)':'');
+ $('bL').innerHTML=l.length?`<table><tr><th>ألماني</th><th>المعنى</th><th>النطق</th><th></th><th></th><th></th></tr>${l.map(w=>`<tr><td class="de">${esc(w.de)}</td><td>${w.ar}</td><td>${w.pr}</td><td>${sp(w.de)}</td><td><button class="sp" aria-label="مفضلة" data-d="${esc(w.de)}" onclick="toggleFav(this.dataset.d)">${f.includes(w.de)?'⭐':'☆'}</button></td><td><button class="sp" aria-label="فتح الدرس" onclick="go('lesson',${w.i})">📖</button></td></tr>`).join('')}</table>`:'<p>لا توجد كلمات مطابقة.</p>'}
+function toggleFav(d){const f=favs(),k=f.indexOf(d);k<0?f.push(d):f.splice(k,1);LS.set(fk(),f);drawBank()}
+function copyBank(){const t=bankList().map(w=>w.de+' = '+w.ar).join('\n');
+ if(!t)return toast('لا توجد كلمات للنسخ.');
+ (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('تم نسخ القائمة.')).catch(()=>toast('تعذّر النسخ التلقائي، حدد الكلمات وانسخها يدويًا.'))}
+
+/* ===== بطاقات المراجعة ===== */
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function cardsPage(){
+ if(!cDeck.length)cDeck=shuffle(allWords());
+ const w=cDeck[cIdx%cDeck.length];
+ return `${backBtn('home','الرئيسية')}<h2>بطاقات المراجعة</h2>
+ <div class="card"><p>البطاقة ${(cIdx%cDeck.length)+1} من ${cDeck.length}</p>
+ <div class="flip"><div><div class="de">${esc(w.de)}</div> ${sp(w.de)}<div style="margin-top:12px">${cShow?w.ar+' <small style="color:var(--mu)">('+w.pr+')</small>':'<small style="color:var(--mu)">فكّر في المعنى، ثم اضغط أظهر</small>'}</div></div></div>
+ <div class="row">${cShow?'<button onclick="cNext(true)">عرفتها ✓</button><button class="ghost" onclick="cNext(false)">أحتاج مراجعة</button>':'<button onclick="cShow=true;render()">أظهر المعنى</button>'}<button class="ghost" onclick="cDeck=shuffle(allWords());cIdx=0;cShow=false;render()">خلط البطاقات</button></div></div>`;
+}
+function cNext(ok){
+ const w=cDeck[cIdx%cDeck.length];
+ if(!ok){const r=LS.get('donia_review',[]);if(!r.includes(w.de)){r.push(w.de);LS.set('donia_review',r)}}
+ cIdx++;cShow=false;render();
+}
+
+/* ===== خطة الدراسة ===== */
+function planPage(){
+ const s=schedData(),today=new Date(),
+  base=s.start?new Date(s.start+'T00:00:00'):new Date(today.getFullYear(),today.getMonth(),today.getDate());
+ const items=[];
+ for(let n=0;n<16;n++){
+  items.push({id:'L'+n,t:'الدرس '+(n+1)+': '+L[n].t,n});
+  if(n%4==3)items.push({id:'R'+n,t:'مراجعة: بطاقات الكلمات والدروس السابقة'});
+ }
+ const dateOf=k=>{const d=new Date(base);d.setDate(base.getDate()+Math.floor(k/s.days)*7+Math.round((k%s.days)*7/s.days));return d};
+ const fmt=d=>d.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'});
+ const doneN=items.filter(it=>s.done.includes(it.id)).length,pct=Math.round(doneN/items.length*100);
+ const rows=items.map((it,k)=>{const ok=s.done.includes(it.id);
+  const title=it.n!==undefined?`<a href="#" onclick="go('lesson',${it.n});return false">${it.t}</a>`:it.t;
+  return `<tr style="${ok?'opacity:.6':''}"><td>${k+1}</td><td>${fmt(dateOf(k))}</td><td>${title}</td><td><button class="sp" aria-label="تم" onclick="schedDone('${it.id}')">${ok?'✅':'⬜'}</button></td></tr>`}).join('');
+ const rev=LS.get('donia_review',[]);
+ return `${backBtn('home','الرئيسية')}<h2>خطة الدراسة</h2>
+ <div class="card"><h3>نظّم مذاكرتك</h3>
+  <div class="row"><span>عدد الجلسات في الأسبوع:</span>${[2,3,4,5].map(n=>`<button class="${s.days==n?'':'ghost'}" onclick="schedSet('days',${n})">${n}</button>`).join('')}</div>
+  <label>تاريخ بداية المذاكرة</label><input type="date" dir="ltr" value="${ymd(base)}" onchange="schedSet('start',this.value)">
+ </div>
+ <div class="card"><b>أنجزت ${doneN} من ${items.length} جلسة</b><div class="prog"><i style="width:${pct}%"></i></div>
+  <p style="color:var(--mu)">تنتهي الخطة تقريبًا: ${fmt(dateOf(items.length-1))}</p></div>
+ <h3>جدول المذاكرة</h3>
+ <div class="card" style="overflow-x:auto"><table><tr><th>#</th><th>اليوم</th><th>الدرس</th><th>تم</th></tr>${rows}</table></div>
+ <div class="note">اضغط اسم الدرس لتفتحه، وعلّم ✅ بعد ما تخلصه. كل 4 دروس فيها جلسة مراجعة.</div>
+ <h3>كلمات تحتاج مراجعة</h3><div class="card">${rev.length?rev.map(w=>`<span class="de" style="display:inline-block;margin:4px 8px 4px 0">${esc(w)}</span>`).join(''):'<p>لا توجد كلمات بعد. أضف كلمات من بطاقات المراجعة بالضغط على "أحتاج مراجعة".</p>'}
+  ${rev.length?`<div class="row"><button class="ghost" onclick="LS.set('donia_review',[]);render();toast('تم مسح القائمة.')">مسح القائمة</button></div>`:''}</div>`;
+}
+
+/* ===== الاشتراك ===== */
+const SUB_CODE='121212#';
+function redeem(){const c=$('subCode').value.trim();if(c!==SUB_CODE)return toast('الكود غير صحيح.');LS.set(sk(),true);toast('تم تفعيل الاشتراك ✓');render()}
+function subPage(){
+ if(!user)return `${backBtn('home','الرئيسية')}<h2>الاشتراك</h2>
+  <div class="card"><p>سجّل الدخول أولًا للاطلاع على تفاصيل الاشتراك.</p><div class="row"><button onclick="openAuth('in')">دخول الطالب</button></div></div>`;
+ return `${backBtn('home','الرئيسية')}<h2>الاشتراك</h2>
+ <div class="card"><div class="price">${PRICE} جنيه <small style="font-size:1rem;color:var(--mu)">/ شهريًا</small></div>
+  <ul class="check"><li>مستوى A1 كامل: وحدتان و16 درسًا</li><li>فيديوهات الشرح وملفات PDF</li><li>تدريبات وبنك كلمات وبطاقات مراجعة</li><li>نطق صوتي ومترجم وخطة دراسة</li></ul></div>
+ <div class="card">${isPaid()?'<b style="color:var(--ok)">اشتراكك مفعّل ✓</b>':`<p>أدخل كود التفعيل:</p><input id="subCode" dir="ltr" placeholder="كود التفعيل"><div class="row"><button onclick="redeem()">تفعيل</button></div>`}</div>`;
+}
+
+render();
+</script>
+</body>
+</html>
